@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'font1';
+  src: url('./assets/fonts/file1-BukOhbJz.woff2') ;
+
+}
+
+@font-face {
+  font-family: 'font2';
+  src: url('./assets/fonts/file2-qSkmV5U_.woff2') ;
+}
+
+@font-face {
+  font-family: 'font3';
+  src: url('./assets/fonts/file3-C9KfY69P.woff2') ;
+
+}
+
+@font-face {
+  font-family: 'font4';
+  src: url('./assets/fonts/file4-B5Lp_o-A.woff2') ;
+
+}
+
+/* Test classes to verify fonts are working
+.font-test-1 {
+  font-family: 'font1', sans-serif;
+}
+
+.font-test-2 {
+  font-family: 'font2', sans-serif;
+}
+
+.font-test-3 {
+  font-family: 'font3', sans-serif;
+}
+
+.font-test-4 {
+  font-family: 'font4', sans-serif;
+} */
