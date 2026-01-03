@@ -6,29 +6,28 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function PageTwo() {
   useEffect(() => {
-    const lines = document.querySelectorAll('.rotate-text')
+    const lines = gsap.utils.toArray('.rotate-text')
 
     lines.forEach((line) => {
       gsap.fromTo(
         line,
         {
-          rotationX: -80,
+          rotationX: -60,
           opacity: 0,
-          y: 80,
+          y: 100,
         },
         {
           rotationX: 0,
           opacity: 1,
           y: 0,
-          duration: 1.2, // ⭐ smoother
-          ease: 'power3.out', // ⭐ smooth easing
           transformOrigin: 'top center',
           scrollTrigger: {
             trigger: line,
-            start: 'top 85%',
+            start: 'top 50%',   // ⭐ first word bhi animate hoga
             end: 'top 40%',
-            toggleActions: 'play reverse play reverse', // ⭐ scroll up & down
-            // markers: true
+            scrub: 0.8,         // ⭐ smooth buttery scroll
+            once: false,
+            // markers: true,
           },
         }
       )
@@ -41,24 +40,26 @@ export default function PageTwo() {
 
   return (
     <div
-      className='bg-white text-center text-black uppercase font-font4 min-h-screen flex flex-col items-center justify-start pt-10'
+      className="bg-white text-black uppercase font-font4 min-h-screen
+                 flex flex-col items-center pt-[10vh]"
       style={{ perspective: '1500px' }}
     >
-      <div className='rotate-text mt-[2vw] transform-gpu'>
-        <h1 className='text-[30vw] leading-[25vw]'>Building</h1>
-      </div>
-      <div className='rotate-text mt-[2vw] transform-gpu'>
-        <h1 className='text-[30vw] leading-[25vw]'>Interactive</h1>
-      </div>
-      <div className='rotate-text mt-[2vw] transform-gpu'>
-        <h1 className='text-[30vw] leading-[25vw]'>React</h1>
-      </div>
-      <div className='rotate-text mt-[2vw] transform-gpu'>
-        <h1 className='text-[30vw] leading-[25vw]'>Applications</h1>
-      </div>
-      <div className='rotate-text mt-[2vw] transform-gpu'>
-        <h1 className='text-[30vw] leading-[25vw]'>That Impress</h1>
-      </div>
+      {[
+        'Building',
+        'Interactive',
+        'React',
+        'Applications',
+        'That Impress',
+      ].map((text, i) => (
+        <div
+          key={i}
+          className="rotate-text transform-gpu will-change-transform"
+        >
+          <h1 className="text-[30vw] leading-[25vw] select-none">
+            {text}
+          </h1>
+        </div>
+      ))}
     </div>
   )
 }
