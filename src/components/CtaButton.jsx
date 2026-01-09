@@ -1,7 +1,16 @@
 import { useRef } from "react";
 import gsap from "gsap";
 
-export default function CtaButton() {
+export default function CtaButton({
+  onClick,
+  href,
+  target,
+  rel,
+  children,
+  icon,
+  showArrow = true,
+  className = ""
+}) {
   const wrapperRef = useRef(null);
   const btnRef = useRef(null);
 
@@ -33,40 +42,62 @@ export default function CtaButton() {
     });
   }
 
-  function handleClick() {
-    const contact = document.getElementById("contact");
-    if (!contact) return;
-    contact.scrollIntoView({ behavior: "smooth" });
-  }
+  const baseClasses = `
+    relative
+    px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-4 lg:px-10 lg:py-4 xl:px-12 xl:py-5 2xl:px-12 2xl:py-5 rounded-full
+    text-base sm:text-lg md:text-xl lg:text-xl xl:text-xl 2xl:text-3xl font-semibold tracking-wide
+    text-primary-text
+    bg-glass-bg2 backdrop-blur-xl
+    border border-glass-border
+    shadow-[0_0_50px_rgba(56,189,248,0.18)]
+    will-change-transform
+    cursor-pointer
+    group
+    flex items-center gap-2 sm:gap-3 md:gap-3 lg:gap-3 xl:gap-3
+    hover:bg-primary-accent hover:border-primary-accent hover:text-primary-bg
+    ${className}
+  `;
+
+  const content = (
+    <>
+      {icon && <span className="text-base sm:text-lg md:text-xl lg:text-xl xl:text-xl">{icon}</span>}
+      <span>{children}</span>
+      {showArrow && (
+        <span className="inline-block transition-transform duration-300 ease-out group-hover:translate-x-2">
+          →
+        </span>
+      )}
+    </>
+  );
 
   return (
     <div
       ref={wrapperRef}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
-      className="
-        relative inline-block
-        pointer-events-auto   /* 🔥 MOST IMPORTANT */
-      "
+      className="relative inline-block pointer-events-auto"
     >
-      <button
-        ref={btnRef}
-        onClick={handleClick}
-        className="
-          relative
-          px-12 py-5 rounded-full
-          text-[1vw] font-semibold tracking-wide
-          text-white
-          bg-white/10 backdrop-blur-xl
-          border border-white/30
-          shadow-[0_0_50px_rgba(255,255,255,0.18)]
-          will-change-transform
-          cursor-pointer
-          group
-        "
-      >
-        Let’s Work Together <span className="inline-block transition-transform duration-300 ease-out group-hover:translate-x-3 group-hover:rotate-45">→</span> 
-      </button>
+      {href ? (
+        <a
+          ref={btnRef}
+          href={href}
+          target={target}
+          rel={rel}
+          className={baseClasses}
+          style={{ fontFamily: 'font3, sans-serif' }}
+        >
+          {content}
+        </a>
+      ) : (
+        <button
+          ref={btnRef}
+          onClick={onClick}
+          className={baseClasses}
+          style={{ fontFamily: 'font3, sans-serif' }}
+        >
+          {content}
+        </button>
+      )}
     </div>
   );
 }
