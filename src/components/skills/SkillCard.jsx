@@ -13,31 +13,42 @@ const SkillCard = ({ skill }) => {
   const contentRef = useRef(null);
 
   useEffect(() => {
-    // Animate card content when skill changes
+    // Animate card content when skill changes with improved timing
     const content = contentRef.current;
     
-    gsap.fromTo(content.children,
-      {
-        opacity: 0,
-        y: 20,
-        scale: 0.95
-      },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "power2.out"
+    // First fade out existing content
+    gsap.to(content.children, {
+      opacity: 0,
+      y: -10,
+      scale: 0.98,
+      duration: 0.2,
+      ease: "power2.in",
+      onComplete: () => {
+        // Then animate in new content
+        gsap.fromTo(content.children,
+          {
+            opacity: 0,
+            y: 20,
+            scale: 0.95
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.5,
+            stagger: 0.08,
+            ease: "power2.out"
+          }
+        );
       }
-    );
+    });
   }, [skill]);
 
   return (
     <motion.div
       ref={cardRef}
       layout
-      className="relative p-8 bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl rounded-3xl border border-slate-700/50 shadow-2xl overflow-hidden"
+      className="relative p-5 md:p-8 bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl rounded-3xl border border-slate-700/50 shadow-2xl overflow-hidden"
       initial={{ opacity: 0, scale: 0.9, rotateY: -10 }}
       animate={{ opacity: 1, scale: 1, rotateY: 0 }}
       transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -64,18 +75,18 @@ const SkillCard = ({ skill }) => {
       <div ref={contentRef} className="relative z-10">
         {/* Skill Icon and Title */}
         <motion.div 
-          className="flex items-center space-x-4 mb-6"
+          className="flex items-center space-x-3 md:space-x-4 mb-4 md:mb-6"
           layout
         >
           <motion.span 
-            className="text-5xl"
+            className="text-3xl md:text-5xl"
             animate={{ rotate: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
             {skill.icon}
           </motion.span>
           <motion.h3 
-            className="text-3xl font-bold text-slate-100"
+            className="text-2xl md:text-3xl font-bold text-slate-100"
             layout
           >
             {skill.title}
@@ -84,7 +95,7 @@ const SkillCard = ({ skill }) => {
 
         {/* Description */}
         <motion.p 
-          className="text-slate-300 text-lg leading-relaxed mb-8"
+          className="text-slate-300 text-base md:text-lg leading-relaxed mb-6 md:mb-8"
           layout
         >
           {skill.description}
@@ -92,11 +103,11 @@ const SkillCard = ({ skill }) => {
 
         {/* Technologies Grid */}
         <motion.div layout>
-          <h4 className="text-slate-200 font-semibold mb-4 text-lg">
+          <h4 className="text-slate-200 font-semibold mb-3 md:mb-4 text-base md:text-lg">
             Technologies & Tools
           </h4>
           
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-2 md:gap-3">
             <AnimatePresence mode="wait">
               {skill.technologies.map((tech, index) => (
                 <motion.div
@@ -112,12 +123,12 @@ const SkillCard = ({ skill }) => {
                   className="group"
                 >
                   <div className={`
-                    p-3 rounded-xl bg-gradient-to-r ${skill.color} bg-opacity-10
+                    p-2 md:p-3 rounded-xl bg-gradient-to-r ${skill.color} bg-opacity-10
                     border border-slate-600/30 backdrop-blur-sm
                     hover:border-slate-500/50 transition-all duration-300
                     group-hover:scale-105 group-hover:shadow-lg
                   `}>
-                    <span className="text-slate-200 font-medium text-sm">
+                    <span className="text-slate-200 font-medium text-xs md:text-sm">
                       {tech}
                     </span>
                   </div>
@@ -129,12 +140,12 @@ const SkillCard = ({ skill }) => {
 
         {/* Skill Level Indicator */}
         <motion.div 
-          className="mt-8 p-4 bg-slate-800/50 rounded-xl border border-slate-700/30"
+          className="mt-6 md:mt-8 p-3 md:p-4 bg-slate-800/50 rounded-xl border border-slate-700/30"
           layout
         >
           <div className="flex items-center justify-between mb-2">
-            <span className="text-slate-300 text-sm font-medium">Proficiency</span>
-            <span className="text-blue-400 text-sm font-semibold">Expert</span>
+            <span className="text-slate-300 text-xs md:text-sm font-medium">Proficiency</span>
+            <span className="text-blue-400 text-xs md:text-sm font-semibold">Expert</span>
           </div>
           
           {/* Animated Progress Bar */}

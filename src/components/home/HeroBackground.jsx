@@ -42,22 +42,19 @@ const HeroBackground = () => {
             className="absolute inset-0 w-full h-full bg-primary"
             style={{
                 // Global background system - consistent #020617 across all sections
-                // Subtle radial gradient for depth while maintaining color consistency
                 background: `radial-gradient(ellipse at center, ${portfolioConfig.theme.background.primary} 0%, ${portfolioConfig.theme.background.primary} 60%, #010510 100%)`
             }}
         >
-            {/* Right-side Developer Image - Advanced Edge Elimination */}
+            {/* Right-side Developer Image - Clearly Visible */}
             <div
                 ref={imageRef}
                 className="absolute right-0 top-0 h-full"
                 style={{
-                    width: 'clamp(50%, 60vw, 70%)',
-                    opacity: '0.9', // Opacity thori barha di takay clear nazar aaye
-                    // 1. IMPROVED MASKING: Isse edges bilkul gayab ho jayenge
-                    maskImage: 'linear-gradient(to right, transparent 0%, black 40%), linear-gradient(to top, transparent 0%, black 20%)',
-                    WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 40%), linear-gradient(to top, transparent 5%, black 25%)',
-                    maskComposite: 'intersect',
-                    WebkitMaskComposite: 'source-in'
+                    width: 'clamp(45%, 55vw, 65%)',
+                    opacity: '0.95',
+                    // Soft edge blending - image clearly visible
+                    maskImage: 'linear-gradient(to right, transparent 0%, black 25%)',
+                    WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 25%)',
                 }}
             >
                 <img
@@ -65,32 +62,28 @@ const HeroBackground = () => {
                     alt="Developer"
                     className="w-full h-full object-contain"
                     style={{
-                        // 2. COLOR CORRECTION: Background ke blue/dark tone se match karne ke liye
-                        // Color graded to match #020617 background system
-                        filter: 'brightness(0.8) contrast(1.1) grayscale(0.2)',
+                        // Minimal filtering - image stays bright and visible
+                        filter: 'brightness(1) contrast(1.05)',
                         objectFit: 'contain',
-                        objectPosition: '80% center',
-                        // Ye line image ko background ke sath "chipka" degi
-                        mixBlendMode: 'screen'
+                        objectPosition: '75% center'
                     }}
                 />
 
-                {/* 3. SMOOTHING OVERLAY: Ye box ke edges ko mazeed chhupa dega */}
+                {/* Light overlay for subtle blending only */}
                 <div
                     className="absolute inset-0"
                     style={{
-                        // Uses exact primary background color for seamless blending
-                        background: `linear-gradient(to right, ${portfolioConfig.theme.background.primary} 0%, transparent 40%)`
+                        // Very light overlay - image remains clearly visible
+                        background: `linear-gradient(to right, ${portfolioConfig.theme.background.primary}60 0%, ${portfolioConfig.theme.background.primary}30 15%, transparent 40%)`
                     }}
                 />
             </div>
 
-            {/* Unified Background Enhancement */}
+            {/* Subtle background gradient for text readability */}
             <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
-                    // Subtle depth gradient derived from primary background
-                    background: `linear-gradient(to right, ${portfolioConfig.theme.background.primary}10 0%, transparent 60%, ${portfolioConfig.theme.background.secondary}05 100%)`
+                    background: `linear-gradient(to right, ${portfolioConfig.theme.background.primary} 0%, ${portfolioConfig.theme.background.primary}F0 35%, ${portfolioConfig.theme.background.primary}A0 55%, transparent 75%)`
                 }}
             />
         </div>

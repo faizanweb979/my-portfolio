@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 import CtaButton from '../common/CtaButton';
 
 /**
  * CONTACT SECTION COMPONENT
  * Purpose: Clean, minimal contact form with smooth animations
  * Animation: Entrance effects, input focus states, form submission
- * Features: Form validation, animated inputs, contact information
+ * Features: Form validation, animated inputs, contact information, EmailJS integration
  */
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -17,6 +18,11 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+
+  // EmailJS Configuration
+  const EMAILJS_SERVICE_ID = 'service_etzwlgs';
+  const EMAILJS_TEMPLATE_ID = 'template_htrls8r';
+  const EMAILJS_PUBLIC_KEY = 'oQOVxD16aF9-CWldR';
 
   // Handle form input changes
   const handleInputChange = (e) => {
@@ -33,18 +39,31 @@ const Contact = () => {
     setIsSubmitting(true);
     
     try {
-      // Replace with your actual form submission logic
-      // This could be an API call, email service, etc.
-      await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate API call
+      // Send email using EmailJS
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        to_name: 'Faizan', // Your name
+      };
+
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
       
       setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
+      console.error('EmailJS Error:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
-      // Reset status after 3 seconds
-      setTimeout(() => setSubmitStatus(null), 3000);
+      // Reset status after 5 seconds
+      setTimeout(() => setSubmitStatus(null), 5000);
     }
   };
 
@@ -52,33 +71,33 @@ const Contact = () => {
   const contactMethods = [
     {
       icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
         </svg>
       ),
       label: "Email",
-      value: "your.email@example.com",
+      value: "faizan.niaz042@gmail.com",
       href: "mailto:your.email@example.com"
     },
     {
       icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
         </svg>
       ),
       label: "Phone",
-      value: "+1 (555) 123-4567",
+      value: "+92 (320) 9020941",
       href: "tel:+15551234567"
     },
     {
       icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
       ),
       label: "Location",
-      value: "San Francisco, CA",
+      value: "Dil Muhammad road near lahore Hotel , Lahore",
       href: null
     }
   ];
@@ -97,10 +116,10 @@ const Contact = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl lg:text-6xl font-bold text-slate-100 mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-100 mb-4 md:mb-6">
             Let's <span className="text-blue-400">Connect</span>
           </h2>
-          <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
             Ready to bring your ideas to life? I'm always excited to discuss new 
             projects and opportunities. Let's create something amazing together.
           </p>
@@ -133,7 +152,7 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-xl text-slate-200 placeholder-slate-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all duration-300"
+                  className="w-full px-3 py-2.5 md:px-4 md:py-3 bg-slate-800/50 border border-slate-700/50 rounded-xl text-slate-200 text-sm md:text-base placeholder-slate-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all duration-300"
                   placeholder="Enter your full name"
                 />
               </motion.div>
@@ -155,7 +174,7 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-xl text-slate-200 placeholder-slate-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all duration-300"
+                  className="w-full px-3 py-2.5 md:px-4 md:py-3 bg-slate-800/50 border border-slate-700/50 rounded-xl text-slate-200 text-sm md:text-base placeholder-slate-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all duration-300"
                   placeholder="your.email@example.com"
                 />
               </motion.div>
@@ -177,7 +196,7 @@ const Contact = () => {
                   value={formData.subject}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-xl text-slate-200 placeholder-slate-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all duration-300"
+                  className="w-full px-3 py-2.5 md:px-4 md:py-3 bg-slate-800/50 border border-slate-700/50 rounded-xl text-slate-200 text-sm md:text-base placeholder-slate-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all duration-300"
                   placeholder="Project inquiry, collaboration, etc."
                 />
               </motion.div>
@@ -198,8 +217,9 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleInputChange}
                   required
-                  rows={6}
-                  className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-xl text-slate-200 placeholder-slate-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all duration-300 resize-none"
+                  rows={5}
+                  className="w-full px-3 py-2.5 md:px-4 md:py-3 bg-slate-800/50 border border-slate-700/50 rounded-xl text-slate-200 text-sm md:text-base placeholder-slate-500 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all duration-300 resize-none"
+                  style={{ minHeight: '120px' }}
                   placeholder="Tell me about your project or how we can work together..."
                 />
               </motion.div>
@@ -247,10 +267,10 @@ const Contact = () => {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-2xl font-bold text-slate-100 mb-6">
+              <h3 className="text-xl md:text-2xl font-bold text-slate-100 mb-4 md:mb-6">
                 Get In Touch
               </h3>
-              <p className="text-slate-400 leading-relaxed mb-8">
+              <p className="text-slate-400 text-sm md:text-base leading-relaxed mb-6 md:mb-8">
                 I'm always open to discussing new opportunities, creative projects, 
                 or just having a chat about technology and development. Feel free to 
                 reach out through any of the channels below.
@@ -270,24 +290,24 @@ const Contact = () => {
                   {method.href ? (
                     <a
                       href={method.href}
-                      className="flex items-center space-x-4 p-4 bg-slate-800/30 hover:bg-slate-800/50 border border-slate-700/30 hover:border-slate-600/50 rounded-xl transition-all duration-300 group"
+                      className="flex items-center space-x-3 md:space-x-4 p-3 md:p-4 bg-slate-800/30 hover:bg-slate-800/50 border border-slate-700/30 hover:border-slate-600/50 rounded-xl transition-all duration-300 group"
                     >
                       <div className="text-blue-400 group-hover:text-blue-300 transition-colors duration-300">
                         {method.icon}
                       </div>
                       <div>
-                        <p className="text-slate-300 font-medium">{method.label}</p>
-                        <p className="text-slate-400 text-sm">{method.value}</p>
+                        <p className="text-slate-300 text-sm md:text-base font-medium">{method.label}</p>
+                        <p className="text-slate-400 text-xs md:text-sm">{method.value}</p>
                       </div>
                     </a>
                   ) : (
-                    <div className="flex items-center space-x-4 p-4 bg-slate-800/30 border border-slate-700/30 rounded-xl">
+                    <div className="flex items-center space-x-3 md:space-x-4 p-3 md:p-4 bg-slate-800/30 border border-slate-700/30 rounded-xl">
                       <div className="text-blue-400">
                         {method.icon}
                       </div>
                       <div>
-                        <p className="text-slate-300 font-medium">{method.label}</p>
-                        <p className="text-slate-400 text-sm">{method.value}</p>
+                        <p className="text-slate-300 text-sm md:text-base font-medium">{method.label}</p>
+                        <p className="text-slate-400 text-xs md:text-sm">{method.value}</p>
                       </div>
                     </div>
                   )}
@@ -301,10 +321,10 @@ const Contact = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
               viewport={{ once: true }}
-              className="p-6 bg-blue-500/10 border border-blue-500/20 rounded-xl"
+              className="p-4 md:p-6 bg-blue-500/10 border border-blue-500/20 rounded-xl"
             >
-              <h4 className="text-blue-400 font-semibold mb-2">Quick Response</h4>
-              <p className="text-slate-300 text-sm">
+              <h4 className="text-blue-400 text-sm md:text-base font-semibold mb-1.5 md:mb-2">Quick Response</h4>
+              <p className="text-slate-300 text-xs md:text-sm">
                 I typically respond to messages within 24 hours. For urgent inquiries, 
                 feel free to reach out via phone or LinkedIn.
               </p>

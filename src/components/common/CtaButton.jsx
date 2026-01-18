@@ -40,7 +40,7 @@ const CtaButton = ({
       onClick={onClick}
       disabled={disabled}
       className={`
-        relative px-8 py-4 rounded-xl font-semibold text-lg
+        relative px-6 py-3 md:px-8 md:py-4 rounded-xl font-semibold text-base md:text-lg
         ${currentVariant.bg} ${currentVariant.hover} ${currentVariant.text}
         border ${currentVariant.border}
         shadow-lg ${currentVariant.glow}

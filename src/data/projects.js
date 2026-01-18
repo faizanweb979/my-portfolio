@@ -8,7 +8,7 @@
 export const projects = [
   {
     id: 1,
-    title: "E-Commerce Platform",
+    title: "Task Management System",
     description: "Full-stack e-commerce solution with React, Node.js, and Stripe integration. Features include user authentication, product management, and real-time inventory tracking.",
     longDescription: `A comprehensive full-stack e-commerce solution built with modern web technologies. This platform features user authentication, product management, shopping cart functionality, secure payment processing with Stripe, and real-time inventory tracking.
 
@@ -50,7 +50,7 @@ The project showcases modern development practices including component-based arc
   },
   {
     id: 2,
-    title: "Task Management App",
+    title: "E-Commerce Website",
     description: "Collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
     longDescription: `A modern task management solution designed for team collaboration and productivity. Built with React and Firebase, this application provides real-time synchronization across all team members.
 
@@ -92,7 +92,7 @@ This project demonstrates expertise in real-time applications, state management,
   },
   {
     id: 3,
-    title: "AI Chat Assistant",
+    title: "To-Do App",
     description: "Intelligent chatbot powered by OpenAI API with natural language processing and context-aware responses.",
     longDescription: `An advanced AI-powered chat assistant that leverages OpenAI's GPT models to provide intelligent, context-aware responses. Built with Python FastAPI backend and React frontend.
 
@@ -134,7 +134,7 @@ This project demonstrates proficiency in AI integration, API development, and cr
   },
   {
     id: 4,
-    title: "Mobile Fitness Tracker",
+    title: "React Dashboard (Planned)",
     description: "Cross-platform mobile app for fitness tracking with workout plans, progress monitoring, and social features.",
     longDescription: `A comprehensive fitness tracking application built with React Native, providing users with workout planning, progress tracking, and social engagement features.
 

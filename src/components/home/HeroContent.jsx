@@ -18,42 +18,47 @@ const HeroContent = () => {
         
         {/* 3D Text Container - Single parent handles all tilt effects */}
         <TiltContainer
-          className="mb-20 lg:mb-24" // Increased spacing around text
-          intensity={8} // Clear, visible tilt effect
+          className="mb-8 md:mb-12 lg:mb-16" // Adjusted spacing for description
+          intensity={8} // Subtle tilt effect
           perspective={1000}
-          duration={0.6}
+          duration={0.5}
         >
           <motion.div
             initial={{ opacity: 0, y: 80, rotateX: -15 }}
             animate={{ opacity: 1, y: 0, rotateX: 0 }}
             transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            <h1 className="text-6xl lg:text-8xl xl:text-9xl font-bold text-slate-100 leading-tight">
+            {/* Greeting */}
+            <p className="text-lg md:text-xl lg:text-2xl text-slate-400 mb-2 md:mb-4">
+              Hi, I'm
+            </p>
+            
+            <h1 className="text-lg md:text-5xl lg:text-6xl xl:text-6xl font-bold text-slate-100 leading-tight mb-4 md:mb-6">
               {/* Text layers with subtle translateZ for 3D depth illusion */}
               <span
                 className="block text-slate-100"
                 style={{ transform: 'translateZ(20px)' }}
               >
-                Creative
+                Faizan Niaz
               </span>
               <span
-                className="block text-blue-400 my-2"
+                className="block text-blue-400 my-1 md:my-2  "
                 style={{ transform: 'translateZ(40px)' }}
               >
-                Developer
-              </span>
-              <span
-                className="block text-slate-100"
-                style={{ transform: 'translateZ(20px)' }}
-              >
-                Portfolio
+                A Creative React Developer
               </span>
             </h1>
+            
+            {/* Description */}
+            <p className="text-base md:text-lg lg:text-xl xl:text-xl text-slate-300 leading-relaxed lg:max-w-xl xl:max-w-xl md:max-w-md max-w-sm">
+              I build modern, responsive, and high-performance web applications
+              using React, focusing on clean UI, smooth UX, and scalable code.
+            </p>
           </motion.div>
         </TiltContainer>
 
         {/* Bottom Action Area - CTA + Social Icons */}
-        <div className="space-y-8">
+        <div className="space-y-6 md:space-y-8">
           
           {/* CTA Button - Positioned lower for better hierarchy */}
           <motion.div

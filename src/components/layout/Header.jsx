@@ -34,13 +34,13 @@ const Header = () => {
       {/* Hamburger Menu Button */}
       <motion.button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="relative w-10 h-10 bg-slate-800/80 backdrop-blur-sm rounded-lg border border-slate-700/50 flex flex-col justify-center items-center space-y-1"
+        className="relative w-9 h-9 md:w-10 md:h-10 bg-slate-800/80 backdrop-blur-sm rounded-lg border border-slate-700/50 flex flex-col justify-center items-center space-y-1"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
         {/* Animated hamburger lines */}
         <motion.span
-          className="w-5 h-0.5 bg-slate-200 rounded-full"
+          className="w-4 md:w-5 h-0.5 bg-slate-200 rounded-full"
           animate={{
             rotate: isMenuOpen ? 45 : 0,
             y: isMenuOpen ? 4 : 0
@@ -72,7 +72,7 @@ const Header = () => {
             animate={{ opacity: 1, scale: 1, x: 0 }}
             exit={{ opacity: 0, scale: 0.8, x: 20 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="absolute top-16 right-0 bg-slate-900/95 backdrop-blur-xl rounded-2xl border border-slate-700/50 p-6 min-w-[200px]"
+            className="absolute top-14 md:top-16 right-0 bg-slate-900/95 backdrop-blur-xl rounded-2xl border border-slate-700/50 p-4 md:p-6 min-w-[180px] md:min-w-[200px]"
           >
             <nav className="flex flex-col space-y-4">
               {navLinks.map((link, index) => (
@@ -90,7 +90,7 @@ const Header = () => {
                     x: 8,
                     color: "#60a5fa"
                   }}
-                  className="text-slate-300 hover:text-blue-400 text-left py-2 px-3 rounded-lg hover:bg-slate-800/50 transition-colors duration-200"
+                  className="text-slate-300 hover:text-blue-400 text-left py-1.5 md:py-2 px-2.5 md:px-3 rounded-lg hover:bg-slate-800/50 text-sm md:text-base transition-colors duration-200"
                 >
                   {link.name}
                 </motion.button>

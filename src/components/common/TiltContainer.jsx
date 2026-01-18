@@ -28,28 +28,28 @@ const TiltContainer = ({
 
     // Single mouse position source for entire tilt effect
     const handleMouseMove = (e) => {
-      const { clientX, clientY } = e;
-      const { innerWidth, innerHeight } = window;
+      const rect = container.getBoundingClientRect();
+      const containerCenterX = rect.left + rect.width / 2;
+      const containerCenterY = rect.top + rect.height / 2;
       
-      // Calculate mouse position as percentage from center
-      const xPercent = (clientX / innerWidth - 0.5) * 2;
-      const yPercent = (clientY / innerHeight - 0.5) * 2;
+      // Calculate mouse position relative to container center
+      const xPercent = (e.clientX - containerCenterX) / (rect.width / 2);
+      const yPercent = (e.clientY - containerCenterY) / (rect.height / 2);
 
-      // Apply 3D transforms ONLY to parent container
-      // This creates cohesive movement where all child elements move as one solid piece
+      // Apply 3D transforms with enhanced intensity and smoother easing
       gsap.to(container, {
-        duration,
+        duration: duration * 0.7, // Faster response for more immediate feedback
         rotationY: xPercent * intensity,
         rotationX: -yPercent * intensity,
         transformPerspective: perspective,
-        ease: "power2.out"
+        ease: "power1.out" // Smoother, more responsive easing
       });
     };
 
     // Mouse leave handler to return to neutral position
     const handleMouseLeave = () => {
       gsap.to(container, {
-        duration: duration * 1.5,
+        duration: duration * 1.2,
         rotationY: 0,
         rotationX: 0,
         ease: "power2.out"
